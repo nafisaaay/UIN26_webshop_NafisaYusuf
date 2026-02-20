@@ -19,6 +19,8 @@ function App() {
 
   console.log("Cart", cart)
 
+  
+
   //reduce legger sammen alle verder i en liste. den ser etter tall i listen, og legger dem sammen 
   useEffect(()=>{
     const totalQuantity = cart.reduce((sum, item) => sum + item.quanity, 0) 
@@ -49,7 +51,6 @@ function Page(){
         <Route path='city' element={<CategoryTitle title='City'/>} /> 
         <Route path='ninjago' element={<CategoryTitle/>} title='Ninjago'/> 
         <Route path='castles-and-knights' element={<CategoryTitle/>} title='castles-and-knights'/> 
-
       </Routes>
     </Layout>
 

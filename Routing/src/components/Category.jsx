@@ -1,19 +1,24 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, useOutletContext } from "react-router-dom"
 
 export default function Category(){
 
+    const {apiEndPoint, defaultApiUrl} = useOutletContext()
 
     const [apiData, setApiData] = useState([])
-
     const {slug} = useParams() 
+
+
+
 //bruker navnverdien som vi bruker som id og bruker det som parameter i url
     const getSingleData = async()=>{
-         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${slug}`)
+         const response = await fetch(apiEndPoint ? apiEndPoint : defaultApiUrl+slug)
          const data = await response.json()
          setApiData(data)
-         console.log(data)
     }
+
+    console.log('cat', apiData, apiEndPoint)
+
 
     useEffect(()=>{
         getSingleData()
