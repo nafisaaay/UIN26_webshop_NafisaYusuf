@@ -3,34 +3,44 @@ import { useParams, useOutletContext } from "react-router-dom"
 
 export default function Category(){
 
-    const {apiEndPoint, defaultApiUrl} = useOutletContext()
-
+    const {apiEndpoint, defaultApiUrl} = useOutletContext()
     const [apiData, setApiData] = useState([])
-    const {slug} = useParams() 
 
+    const spritesImg = apiData?.sprites
+    ? Object.keys(apiData.sprites)
+    : [];
 
+    const { slug,cat } = useParams()
+    
+    console.log("Denne kommer fra Category", apiEndpoint)
 
 //bruker navnverdien som vi bruker som id og bruker det som parameter i url
-    const getSingleData = async()=>{
-         const response = await fetch(apiEndPoint ? apiEndPoint : defaultApiUrl+slug)
-         const data = await response.json()
-         setApiData(data)
+      const getSingleData = async()=>{
+        const response = await fetch(apiEndpoint ? apiEndpoint : defaultApiUrl+slug+"/"+cat)
+        const data = await response.json()
+        setApiData(data)
     }
 
-    console.log('cat', apiData, apiEndPoint)
 
 
-    useEffect(()=>{
+      useEffect(()=>{
         getSingleData()
-    },[slug])
+    },[cat, apiEndpoint])
    
+    console.log("mine bilder",spritesImg)
+
     return (
         <main>
-            <h1>{apiData?.name}</h1>
-            <section>
+             <h1>{apiData?.name}</h1>
+             <section>
                 <h2>Bilder</h2>
-                <img src={apiData?.sprites?.front_default} alt={apiData?.name}/>
-            </section>
+                {spritesImg?.map((item) => (
+                    apiData?.sprites?.[item] ?
+                     <img key={item} src={apiData?.sprites?.[item]} alt={apiData?.name} />
+                       : null
+                       ))}
+             </section>
         </main>
+       
     )
 }
