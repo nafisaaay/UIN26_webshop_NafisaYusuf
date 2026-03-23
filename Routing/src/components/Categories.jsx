@@ -11,7 +11,7 @@ export default function Categories(){
     const getData = async()=>{
         const response = await fetch(apiEndPoint ? apiEndPoint : defaultApiUrl+slug)
         const data = await response.json()
-         setApiData(data.results)
+        setApiData(data.results)
     }
 
     console.log("denne kommer fra categories",apiData)
