@@ -22,7 +22,7 @@ export default function PokemonCard({url, classN}){
        
         <article className={`pokemon-card type-${classN}`}>
             <Link to={`/pokemons/${pokemon?.id}`} className="pokemon-link">
-            {/*Gjør om til en kompnen*/} 
+            {/*Gjør om til en kompnent*/} 
             <h3>{pokemon?.name}</h3>
             <img src={pokemon?.sprites?.front_default} alt={pokemon?.name} />
             <p>#00{pokemon?.id}</p>

@@ -6,9 +6,9 @@ export default function Home(){
     const [pokemons, setPokemons] = useState()
     const [types, setTypes] = useState()
 
-    const getData = async (url, set)=>{  // BUG: Missing async keyword
-        const response = await fetch(url)  // BUG: await without async
-        const data = await response.json()  // BUG: await without async
+    const getData = async (url, set)=>{  
+        const response = await fetch(url)  
+        const data = await response.json()  
         set(data.results)
       
     }
@@ -25,7 +25,6 @@ export default function Home(){
             <PokemonList pokemons={pokemons} />
             <TypeList types={types} />
         </main>
-        {/* BUG: Missing closing fragment tag </> */}
         </>
     )
 }
